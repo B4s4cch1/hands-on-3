@@ -209,7 +209,7 @@
    (customer (customerId ?cid) (cardId ?cardId))
    (card (cardID ?cardId) (type "credit"))
    (line-item (orderNumber ?num) (productId ?pid))
-   (product (productId ?pid) (brand "apple"))
+   (product (productId ?pid) (brand apple))
 =>
    (printout t "13. La orden " ?num " del cliente " ?cid
               " califica para meses sin intereses por comprar un producto Apple con tarjeta de crédito." crlf)
@@ -220,10 +220,74 @@
    (customer (customerId ?cid) (cardId ?cardId))
    (card (cardID ?cardId) (type "debit") (group "mastercard"))
    (line-item (orderNumber ?num) (productId ?pid))
-   (product (productId ?pid) (brand "motorola"))
+   (product (productId ?pid) (brand motorola))
 =>
    (printout t "14. La orden " ?num " del cliente " ?cid
               " califica para una promoción especial por comprar un producto Motorola con tarjeta de débito Mastercard." crlf)
+)
+
+(defrule descuentoAccesorioBanamex
+  (order (orderNumber ?num) (customerId ?cid) (paymentMethod "card"))
+  (customer (customerId ?cid) (cardId ?cardId))
+  (card (cardID ?cardId) (bank "banamex") (type "credit"))
+  (line-item (orderNumber ?num) (productId ?pid))
+  (product (productId ?pid) 
+           (category ?cat&:(or (eq ?cat "mouse") 
+                               (eq ?cat "keyboard") 
+                               (eq ?cat "headphones")
+                               (eq ?cat "charger")
+                               (eq ?cat "case")))
+           (price ?p))
+  =>
+  (bind ?nuevoPrecio (/ ?p 2))
+  (printout t "15. El cliente " ?cid " recibe un 50% de descuento en el accesorio " ?pid
+              " por pagar con tarjeta de crédito Banamex. Nuevo precio: $" ?nuevoPrecio crlf)
+)
+
+(defrule descuentoSmartphoneEfectivo
+  (order (orderNumber ?num) (customerId ?cid) (paymentMethod "cash"))
+  (line-item (orderNumber ?num) (productId ?pid))
+  (product (productId ?pid) (category "smartphone") (price ?p))
+  =>
+  (bind ?descuento (* ?p 0.10))
+  (bind ?nuevoPrecio (- ?p ?descuento))
+  (printout t "16. El cliente " ?cid 
+              " recibe un 10% de descuento en el smartphone " ?pid
+              " por pagar en efectivo. Precio final: $" ?nuevoPrecio crlf)
+)
+
+(defrule valesAmex
+  (order (orderNumber ?num) (customerId ?cid) (paymentMethod "card"))
+  (customer (customerId ?cid) (cardId ?cardId))
+  (card (cardID ?cardId) (group "american express"))
+  =>
+  (printout t "17. La orden " ?num " califica para $100 MXN en vales por pagar con tarjeta American Express." crlf)
+)
+
+(defrule valesBanregio
+  (order (orderNumber ?num) (customerId ?cid) (paymentMethod "card"))
+  (customer (customerId ?cid) (cardId ?cardId))
+  (card (cardID ?cardId) (bank "banregio"))
+  =>
+  (printout t "18. La orden " ?num " califica para $100 MXN en vales por pagar con tarjeta Banregio." crlf)
+)
+
+(defrule descuentoAudifonos
+  (order (orderNumber ?num) (customerId ?cid))
+  (line-item (orderNumber ?num) (productId ?pid))
+  (product (productId ?pid) (category "headphones") (price ?p))
+  =>
+  (printout t "19. La orden " ?num " califica para un 10% de descuento en audífonos." crlf)
+)
+
+(defrule descuento-charger-cable
+  (order (orderNumber ?num) (customerId ?cid))
+  (line-item (orderNumber ?num) (productId ?pid1))
+  (product (productId ?pid1) (category "charger"))
+  (line-item (orderNumber ?num) (productId ?pid2))
+  (product (productId ?pid2) (category "cable"))
+  =>
+  (printout t "20. La orden " ?num " califica para un 15% de descuento por comprar cargador y cable." crlf)
 )
 
 

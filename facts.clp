@@ -109,7 +109,7 @@
 	(order (orderNumber 1015) (customerId 5) (paymentMethod "card"))
 	(order (orderNumber 1020) (customerId 5) (paymentMethod "cash"))
 
-	;De 1019. 1021 a 1024
+	;1022 y 1023
 	(order (orderNumber 1024) (customerId 5) (paymentMethod "paypal"))
 
 	(order (orderNumber 1025) (customerId 7) (paymentMethod "cash"))
@@ -117,10 +117,14 @@
 	(order (orderNumber 1027) (customerId 7) (paymentMethod "card"))
 
 	(order (orderNumber 1028) (customerId 8) (paymentMethod "cash"))
+	(order (orderNumber 1021) (customerId 8) (paymentMethod "card"))
 
 	(order (orderNumber 1029) (customerId 9) (paymentMethod "card"))
 	
 	(order (orderNumber 1030) (customerId 10) (paymentMethod "card"))
+
+	(order (orderNumber 1023) (customerId 10) (paymentMethod "card"))
+	
 )
 
 
@@ -144,6 +148,7 @@
 	(line-item (orderNumber 1013) (productId 314) (quantity 2))
 	(line-item (orderNumber 1010) (productId 329) (quantity 1))
 	(line-item (orderNumber 1005) (productId 204) (quantity 2))
+	(line-item (orderNumber 1019) (productId 205) (quantity 1))
 
 	(line-item (orderNumber 1016) (productId 104) (quantity 1))
 	(line-item (orderNumber 1014) (productId 322) (quantity 1))
@@ -166,6 +171,8 @@
 	(line-item (orderNumber 1024) (productId 325) (quantity 1))
 	(line-item (orderNumber 1024) (productId 208) (quantity 1))
 
+	(line-item (orderNumber 1021)(productId 200)(quantity 1))
+
 	(line-item (orderNumber 1027) (productId 202) (quantity 1))
 	(line-item (orderNumber 1027) (productId 300) (quantity 1))
 	;Descuento en productos de la misma marca
@@ -180,4 +187,7 @@
 	(line-item (orderNumber 1030) (productId 105) (quantity 1))
 	(line-item (orderNumber 1030) (productId 323) (quantity 1))
 	;Descuento por comprar producto misma marca en mismo color
+
+	(line-item (orderNumber 1023) (productId 301) (quantity 1))
+	(line-item (orderNumber 1023) (productId 307) (quantity 1))
 )
