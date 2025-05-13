@@ -1,19 +1,24 @@
-assert(line-item (1031, 100, 1))
+(assert (line-item (orderNumber 1001)(productId 101)(quantity 1)))
 
-assert(order(1031, 1,"credit card"))
+(assert (order(orderNumber 1001)(customerId 2)(paymentMethod "cash")))
+
+(assert (line-item (orderNumber 1002)(productId 202)(quantity 10)))
+
+(assert (order(orderNumber 1002)(customerId 3)(paymentMethod "card")))
 
 	(card (cardID 11) (number "4567 8901 2345 6789") (bank "banbajio") (expirationDate "02/30") (type "credit") (group "mastercard"))
-
-(deftemplate line-item
-  (slot orderNumber)
-  (slot productId)
-  (slot quantity (default 1))
-)
 
 (deftemplate order
   (slot orderNumber)
   (slot customerId)
   (slot paymentMethod)
+)
+
+(deftemplate line-item
+  (slot orderNumber)
+  (slot productId)
+  (slot quantity (default 1))
+  (slot processed (default FALSE))
 )
 
 Ideas descuentos: 

@@ -55,7 +55,6 @@
 	(product (productId 329) (brand hp) (category "cooling pad") (model "dual-fan") (color "black") (price 45) (stock 90))
 )
 
-
 (deffacts cards
 	(card (cardID 1) (number "1234 5461 7827 9816") (bank "santander") (expirationDate "14/06") (type "credit") (group "mastercard"))
 	(card (cardID 2) (number "9876 4321 1234 5678") (bank "bbva") (expirationDate "10/25") (type "debit") (group "visa"))
